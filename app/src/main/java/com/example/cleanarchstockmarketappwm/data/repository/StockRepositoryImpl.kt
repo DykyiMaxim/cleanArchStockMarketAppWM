@@ -1,5 +1,7 @@
 package com.example.cleanarchstockmarketappwm.data.repository
 
+import com.example.cleanarchstockmarketappwm.data.csv.CSVParser
+import com.example.cleanarchstockmarketappwm.data.csv.CompanyListingsParser
 import com.example.cleanarchstockmarketappwm.data.local.StockDataBase
 import com.example.cleanarchstockmarketappwm.data.mapper.toCompanyListing
 import com.example.cleanarchstockmarketappwm.data.remote.StockApi
@@ -17,7 +19,8 @@ import javax.inject.Singleton
 @Singleton
 class StockRepositoryImpl @Inject constructor(
     val api:StockApi,
-    val db:StockDataBase
+    val db:StockDataBase,
+    val companyListingsParser: CSVParser<CompanyListing>
 ):StockRepository {
     private val dao = db.dao
 
@@ -43,10 +46,21 @@ class StockRepositoryImpl @Inject constructor(
             val remoListings = try{
                 val response = api.getListings()
 
+                companyListingsParser.parse(response.byteStream())
+
             }catch (e: HttpException){
                 e.printStackTrace()
                 emit(Resource.Error("Cant Load Data"))
             }
+            remoListings?.let{listings ->
+                emit(Resource.Success(listings))
+                emit(Resource.Loading(false))
+                dao.clearCompanyListings()
+                dao.insertCompanyListings()
+                )
+            }
+
+
         }
     }
 }
