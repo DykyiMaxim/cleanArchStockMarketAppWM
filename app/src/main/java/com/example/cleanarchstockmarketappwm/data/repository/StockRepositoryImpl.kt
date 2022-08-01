@@ -3,6 +3,7 @@ package com.example.cleanarchstockmarketappwm.data.repository
 import com.example.cleanarchstockmarketappwm.data.csv.CSVParser
 import com.example.cleanarchstockmarketappwm.data.csv.CompanyListingsParser
 import com.example.cleanarchstockmarketappwm.data.local.StockDataBase
+import com.example.cleanarchstockmarketappwm.data.mapper.toCompanyEntity
 import com.example.cleanarchstockmarketappwm.data.mapper.toCompanyListing
 import com.example.cleanarchstockmarketappwm.data.remote.StockApi
 import com.example.cleanarchstockmarketappwm.domain.model.CompanyListing
@@ -51,13 +52,27 @@ class StockRepositoryImpl @Inject constructor(
             }catch (e: HttpException){
                 e.printStackTrace()
                 emit(Resource.Error("Cant Load Data"))
+                null
+            } catch (e: HttpException) {
+                e.printStackTrace()
+                emit(Resource.Error("Couldn't load data"))
+                null
             }
+
+
             remoListings?.let{listings ->
                 emit(Resource.Success(listings))
                 emit(Resource.Loading(false))
                 dao.clearCompanyListings()
-                dao.insertCompanyListings()
+                dao.insertCompanyListings(
+                    listings.map{it.toCompanyEntity()}
                 )
+                emit(Resource.Success(
+                    data = dao.searchCompanyListing("").map{it.toCompanyListing()}
+                )
+                )
+                //emit(Resource.Loading(false))
+
             }
 
 
