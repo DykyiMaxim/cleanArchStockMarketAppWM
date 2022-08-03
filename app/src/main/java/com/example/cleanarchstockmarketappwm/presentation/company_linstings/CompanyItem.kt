@@ -33,7 +33,7 @@ fun CompanyItem(
                         fontWeight = FontWeight.SemiBold,
                         fontSize = 16.sp,
                         color = MaterialTheme.colors.onBackground,
-                        overflow = TextOverflow.Ellipsis,
+                       // overflow = TextOverflow.Ellipsis,
                         maxLines = 1,
                         modifier = Modifier.weight(1f)
                     )
