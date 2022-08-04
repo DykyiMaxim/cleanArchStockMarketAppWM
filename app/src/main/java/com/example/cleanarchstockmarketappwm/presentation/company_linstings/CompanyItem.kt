@@ -35,7 +35,7 @@ fun CompanyItem(
                         color = MaterialTheme.colors.onBackground,
                        // overflow = TextOverflow.Ellipsis,
                         maxLines = 1,
-                        modifier = Modifier.weight(1f)
+                        modifier = Modifier.fillMaxWidth()
                     )
                 Spacer(modifier = Modifier.weight(4F))
                 Text(
