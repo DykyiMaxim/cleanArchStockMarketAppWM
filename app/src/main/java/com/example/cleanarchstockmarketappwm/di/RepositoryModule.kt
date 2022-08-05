@@ -2,8 +2,10 @@ package com.example.cleanarchstockmarketappwm.di
 
 import com.example.cleanarchstockmarketappwm.data.csv.CSVParser
 import com.example.cleanarchstockmarketappwm.data.csv.CompanyListingsParser
+import com.example.cleanarchstockmarketappwm.data.csv.IntradayinfoParser
 import com.example.cleanarchstockmarketappwm.data.repository.StockRepositoryImpl
 import com.example.cleanarchstockmarketappwm.domain.model.CompanyListing
+import com.example.cleanarchstockmarketappwm.domain.model.IntradayInfo
 import com.example.cleanarchstockmarketappwm.domain.repository.StockRepository
 import dagger.Binds
 import dagger.Module
@@ -19,6 +21,15 @@ abstract class RepositoryModule {
     abstract fun  bindCompanyListingsParser(
         companyListingsParser: CompanyListingsParser
     ):CSVParser<CompanyListing>
+
+    @Binds
+    @Singleton
+    abstract fun  bindIntradayInfoParser(
+        IntradayinfoParser : IntradayinfoParser
+    ):CSVParser<IntradayInfo>
+
+
+
 
     @Binds
     @Singleton
