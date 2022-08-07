@@ -29,14 +29,15 @@ fun CompanyItem(
             Row(
                 modifier = Modifier.fillMaxWidth()
             ) {
-                Text(text = company.name,
-                        fontWeight = FontWeight.SemiBold,
-                        fontSize = 16.sp,
-                        color = MaterialTheme.colors.onBackground,
-                       // overflow = TextOverflow.Ellipsis,
-                        maxLines = 1,
-                        modifier = Modifier.fillMaxWidth()
-                    )
+                Text(
+                    text = company.name,
+                    fontWeight = FontWeight.SemiBold,
+                    fontSize = 16.sp,
+                    color = MaterialTheme.colors.onBackground,
+                    overflow = TextOverflow.Ellipsis,
+                    maxLines = 1,
+                    modifier = Modifier.weight(15f)
+                )
                 Spacer(modifier = Modifier.weight(4F))
                 Text(
                     text = company.exchange,
