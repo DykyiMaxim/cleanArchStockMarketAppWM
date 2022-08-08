@@ -46,14 +46,14 @@ fun StockChart(
             drawContext.canvas.nativeCanvas.apply {
                 drawText(
                     hour.toString(),
-                    spacing + i + spacePerHour,
+                    spacing + i *spacePerHour,
                     size.height -5,
                     textPaint
                 )
             }
         }
         val priceStep = (maxValue - minvalue) / 5f
-        (1..5).forEach{i->
+        (0..4).forEach{i->
             drawContext.canvas.nativeCanvas.apply {
                 drawText(
                     round(minvalue + priceStep * i).toString(),

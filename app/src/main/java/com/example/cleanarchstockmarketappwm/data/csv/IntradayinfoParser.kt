@@ -28,9 +28,18 @@ class IntradayinfoParser @Inject constructor():CSVParser<IntradayInfo> {
                     val dto = IntaradayInfoDto(timestamp,close.toDouble())
                     dto.toIntaradayInfo()
                 }
+
                 .filter {
-                    it.date.dayOfMonth ==LocalDate.now().minusDays(1).dayOfMonth
+//                    val day:Int = LocalDate.now().dayOfWeek.value
+//                    var minusdays:Long=1
+//                    when (day) {
+//                        1-> minusdays =4
+//                        7-> minusdays =2
+//                    }
+                    it.date.dayOfMonth ==LocalDate.now().minusDays(4).dayOfMonth
+
                 }
+
                 .sortedBy { it.date.hour }
                 .also { csvReader.close() }
         }
