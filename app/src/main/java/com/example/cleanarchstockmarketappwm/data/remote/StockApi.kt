@@ -1,5 +1,6 @@
 package com.example.cleanarchstockmarketappwm.data.remote
 
+import com.example.cleanarchstockmarketappwm.BuildConfig
 import okhttp3.ResponseBody
 import retrofit2.http.GET
 import retrofit2.http.Query
@@ -25,7 +26,7 @@ interface StockApi {
 
 
     companion object{
-        const val API_KEY="YOROWZC5EYP2S5SK"
+        const val API_KEY=BuildConfig.API_KEY
         const val Base_URL = "https://alphavantage.co"
     }
 }
